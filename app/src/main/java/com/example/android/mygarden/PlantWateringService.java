@@ -3,6 +3,7 @@ package com.example.android.mygarden;
 /**
  * Created by Yessy on 30/12/2017.
  */
+
 import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -132,6 +133,8 @@ public class PlantWateringService extends IntentService {
         }
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, PlantWidgetProvider.class));
+        //Trigger data update to handle the GridView widgets and force a data refresh
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_grid_views);
         //Now update all widgets
         PlantWidgetProvider.updatePlantWidgets(this, appWidgetManager, imgRes, plantId, canWater, appWidgetIds);
     }
